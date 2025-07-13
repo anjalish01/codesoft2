@@ -1,0 +1,26 @@
+import string
+import secrets
+
+def get_length(prompt="Enter desired password length (8–64): "):
+    while True:
+        try:
+            n = int(input(prompt))
+            if 8 <= n <= 64:
+                return n
+            print("Please enter a number between 8 and 64.")
+        except ValueError:
+            print("Invalid input—enter an integer.")
+
+def generate_password(length):
+    chars = string.ascii_letters + string.digits + string.punctuation
+    # Secure random choice
+    return ''.join(secrets.choice(chars) for _ in range(length))
+
+def main():
+    print("🔐 Secure Password Generator")
+    length = get_length()
+    pwd = generate_password(length)
+    print("\nGenerated password:\n" + pwd)
+
+if __name__ == "__main__":
+    main()
